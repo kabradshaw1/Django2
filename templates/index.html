@@ -20,10 +20,8 @@
 {% for feature in features %}
 <h2>{{feature.name}}</h2>
 <p>{{feature.details}}</p>
-{% if feature.is_true == True %}
-<p>stuff and things</p>
-{% else %}
-<p>pancakes are the biznaz</p>
+{% if feature.name == 'stuff' %}
+<p>Added from if statement for stuff</p>
 {% endif %}
 {% endfor %}
 
