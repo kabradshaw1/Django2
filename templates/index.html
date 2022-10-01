@@ -5,10 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Django Tutorial</title>
   <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
+  {% if user.is_authenticated %}
+  <h1>Welcome, {{user.username}}</h1>
+  {% else %}
+  <h1>Apples and Bananas!</h1>
+  {% endif %}
+  {% if user.is_authenticated %}
+  <a href="logout">logout</a>
+  {% else %}
+  <a href="login">login</a>
+  {% endif %}
   <!-- Hello there {{name}}<br>you are {{age}}<br>you are {{nationality}} -->
 <h1>Input your text below: </h1>
 <form method="POST" action="counter">

@@ -9,10 +9,6 @@ def index(request):
   features = Feature.objects.all()
   return render(request, 'index.html', {'features': features})
 
-
-# def form(request):
-#   return render(request, 'form.html')
-
 def counter(request):
   text = request.POST['text']
   number_of_words = len(text.split())
@@ -34,7 +30,7 @@ def register(request):
         return redirect('register')
       else:
         user = User.objects.create_user(username=username, email=email, password=password)
-        user.save();
+        user.save()
         return redirect('login')
     else:
       messages.info(request, 'Password not the same')
@@ -42,7 +38,28 @@ def register(request):
   else:
     return render(request, 'register.html')
 
+def login(request):
+  if request.method == 'POST':
+    username = request.POST['username']
+    password = request.POST['password']
 
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None:
+      auth.login(request, user)
+      return redirect('/')
+    else:
+      messages.info(request, 'Credentials Invalid')
+      return redirect('login')
+  else:
+    return render(request, 'login.html')
+  
+def logout(request):
+  auth.logout(request)
+  return redirect('/')
+
+def post(request, pk):
+  return render(request, 'post.html')
 # examples used during the course
 # def index(request):
   # feature1 = Feature()
